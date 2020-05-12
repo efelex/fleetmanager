@@ -1,0 +1,103 @@
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary font-weight-bold">
+  <a class="navbar-brand" href="#">Fleet Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+      
+        <a class="nav-link" href="#">Driver Management</a>
+      </li>
+
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Fuel Requisition
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{%url 'fuelrequisition'%}">Create Fuel Requisition</a>
+        <a class="dropdown-item" href="{%url 'fuelrequisitionlist'%}">List Fuel Requistions</a>
+         <a class="dropdown-item" href="#">Edit Fuel Requistion</a>
+                
+        </div>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Manage vehicles
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Vehicle Requisition</a>
+        <a class="dropdown-item" href="{%url 'vehicle_create'%}">Vehicle Addition</a>
+         <a class="dropdown-item" href="#">Edit Vehicle Details</a>
+         <a class="dropdown-item" href="{%url 'vehiclelist'%}">Vehicle Listing</a>
+        <a class="dropdown-item" href="#">Vehicle Search</a>
+          <a class="dropdown-item" href="#">Service and Repair</a>
+          <a class="dropdown-item" href="#">Token Management</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Insurance</a>
+          
+        </div>
+      </li>
+
+
+<li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        System Management 
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="/vehicleMake">Vehicle Makes</a>
+          <a class="dropdown-item" href="#">Vehicle Models</a>
+          <a class="dropdown-item" href="#">Add Vehicle</a>
+          <div class="dropdown-divider"> </div>
+          <a class="dropdown-item" href="#"></a>
+          
+        </div>
+ </li>
+ <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        User Management 
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="{%url 'createuser'%}">Create User</a>
+          <a class="dropdown-item" href="/account/editprofile">Edit User</a>
+          <a class="dropdown-item" href="#"></a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#"></a>
+          
+        </div>
+ </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link " href="#" >Reports</a>
+      </li>
+      
+    </ul>
+    {%if request.user.is_authenticated%}
+    <ul class="navbar-nav">
+    <li class="nav-item" ml-auto>
+        <a class="nav-link" href="{%url 'logout'%}" >Logout</a>
+      </li>
+      </ul>
+    {% else %}
+    <ul class="navbar-nav">
+    <li class="nav-item" ml-auto>
+        <a class="nav-link" href="{%url 'login' %}" >Login</a>
+      </li>
+      </ul>
+      {% endif %}
+    <!--
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    -->
+  </div>
+</nav>

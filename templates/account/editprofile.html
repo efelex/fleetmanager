@@ -1,0 +1,21 @@
+{% extends 'base.html' %} 
+
+{%load crispy_forms_tags %}
+{% block content %}
+<h2 class="text-center">Edit Profile </h2>
+<form method="POST" action="{%url 'editprofile'%}">
+  {% csrf_token %} {% if form.errors %}
+
+  <p>"Your form has errors ...."</p>
+  {% if form.subject.errors %}
+    <ol>
+    {% for error in form.subject.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ol>
+{% endif %}
+
+  {% endif%} {{form|crispy }} {{profile_form|crispy}}
+  <input type="submit" value="Edit Profile" class="btn btn-secondary" />
+</form>
+{% endblock %}
