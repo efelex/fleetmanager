@@ -1,11 +1,11 @@
 from django import forms
-from .models import FuelRequistion
+from .models import FuelRequisition
 
 
 class FuelRequistionForm(forms.ModelForm):
 
     class Meta:
-        model = FuelRequistion
+        model = FuelRequisition
         fields = fields = '__all__'
 
         # [

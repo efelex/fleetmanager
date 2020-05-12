@@ -1,6 +1,6 @@
 from django.contrib import admin
 # Register your models here.
-from .models import Fuel, RequisitionStatus, FuelRequistion
+from .models import Fuel, RequisitionStatus, FuelRequisition
 from vehicle.models import VehicleModel
 
 
@@ -26,4 +26,4 @@ class FuelRequistionAdmin(admin.ModelAdmin):
 
 admin.site.register(Fuel)
 admin.site.register(RequisitionStatus)
-admin.site.register(FuelRequistion, FuelRequistionAdmin)
+admin.site.register(FuelRequisition, FuelRequistionAdmin)

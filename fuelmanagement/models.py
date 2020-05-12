@@ -19,7 +19,7 @@ class RequisitionStatus(models.Model):
         return self.requisition_status
 
 
-class FuelRequistion(models.Model):
+class FuelRequisition(models.Model):
     requestor = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, related_name='requested_by')
     requstion_date = models.DateTimeField()

@@ -1,9 +1,9 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from .forms import FuelRequistionForm
-from .models import FuelRequistion
-from django.views.generic import ListView
+from .models import FuelRequisition
+from django.views.generic import DetailView, ListView
 
 
 def index(request):
@@ -33,9 +33,29 @@ def fuelrequisition_create_view(request):
     return render(request,  "fuelmanagement/create_requistion.html", context)
 
 
-class FuelRequistionListView(ListView):
+def fuelrequistion_detail_view(request, requisition_id):
+    # return HttpResponse(requisition_id)
+    requisition = FuelRequisition.objects.get(id=requisition_id)
+    print(requisition)
+    context = {'requisition': requisition}
+    return render(request,  "fuelmanagement/fuelrequisition_detail.html", context)
 
-    model = FuelRequistion
+
+# #********************************8
+# class FuelRequistionDetailView(DetailView):
+#     # model = FuelRequistion
+#     queryset = FuelRequistion.objects.all()
+#     # 'url {'viewrequistiondetail'}'
+#     template_name = '/fuelmanagement/fuelrequisition_detail.html  '
+#     context_object_name = 'fuelrequisitions'
+
+#     def get_object(self):
+#         id_ = self.kwargs.get("id")
+#         return get_object_or_404(FuelRequistion, id=id_)
+
+
+class FuelRequistionListView(ListView):
+    model = FuelRequisition
     template_name = '/fuelmanagement/fuelrequisition_list.html'
     context_object_name = 'fuelrequisitions'
     # ordering                        # how to order the vehicles by default

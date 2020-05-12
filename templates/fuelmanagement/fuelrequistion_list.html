@@ -24,6 +24,7 @@
   </thead>
   <tbody>
   {% for fuelrequisition in fuelrequisitions %}
+   <a href={% url 'viewrequistiondetail' id=fuelrequisition.id %}>
   <tr>
     <td>{{fuelrequisition.registration_number}}</td>
     <td>{{fuelrequisition.requestor}}</td>
@@ -40,6 +41,7 @@
     <td>{{fuelrequisition.fuel_recieved_by}}</td>
 
   </tr>
+  </a>
   {%endfor%}
   </tbody>
 </table>
