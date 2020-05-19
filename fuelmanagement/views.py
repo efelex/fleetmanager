@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from .forms import FuelRequistionForm
 from .models import FuelRequisition
+from .filters import RequisitionFilter
 from django.views.generic import DetailView, ListView
 
 
@@ -35,10 +36,14 @@ def fuelrequisition_create_view(request):
 
 def fuelrequistion_detail_view(request, requisition_id):
     # return HttpResponse(requisition_id)
-    requisition = FuelRequisition.objects.get(id=requisition_id)
+    # qs = self.model.objects.all()
+    queryset = FuelRequisition.objects.select_related(
+        'requestor__profile', 'approved_by', 'registration_number', 'fuel_recieved_by', 'fuel').filter(id=requisition_id)
+    # print(queryset.query)
+    requisition = get_object_or_404(queryset)
     print(requisition)
     context = {'requisition': requisition}
-    return render(request,  "fuelmanagement/fuelrequisition_detail.html", context)
+    return render(request,  "fuelmanagement/requistion_detail.html", context)
 
 
 # #********************************8
@@ -55,7 +60,24 @@ def fuelrequistion_detail_view(request, requisition_id):
 
 
 class FuelRequistionListView(ListView):
-    model = FuelRequisition
+    # model = FuelRequisition
+    # myfilter = RequisitionFilter()
     template_name = '/fuelmanagement/fuelrequisition_list.html'
-    context_object_name = 'fuelrequisitions'
+    # context_object_name = 'fuelrequistions'
+    # paginate_by = 4
     # ordering                        # how to order the vehicles by default
+
+    def get_queryset(self):
+        # qs = self.model.objects.all()
+        qs = FuelRequisition.objects.select_related(
+            'requestor__profile', 'approved_by', 'registration_number', 'fuel_recieved_by', 'fuel').all()
+        requisition_filtered_list = RequisitionFilter(
+            self.request.GET, queryset=qs)
+        return requisition_filtered_list.qs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['requisition_filtered_list'] = RequisitionFilter(
+            self.request.GET, queryset=self.get_queryset())
+        # print(context.values)
+        return context

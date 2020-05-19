@@ -39,10 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # thirdparty apps
     'crispy_forms',
+    'django_filters',
     # own apps
     'fuelmanagement.apps.FuelmanagementConfig',
     # 'account.apps.AccountConfig',
-    'pages', 'vehicle', 'account'
+    'pages', 'vehicle', 'account',
 ]
 ##AUTH_USER_MODEL = 'account.UserAccount'
 

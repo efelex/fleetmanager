@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from vehicle.models import Vehicle, VehicleModel
+from account.models import UserProfile
 from django.contrib.auth.models import User
 # Create your models here.
 
@@ -23,12 +24,16 @@ class FuelRequisition(models.Model):
     requestor = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, related_name='requested_by')
     requstion_date = models.DateTimeField()
+
     approved_by = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, blank=True, null=True)
+
     approval_date = models.DateField(blank=True, null=True)
     fuel = models.ForeignKey(Fuel, on_delete=models.DO_NOTHING)
+
     fuel_recieved_by = models.ForeignKey(
         User, on_delete=models.DO_NOTHING, related_name='recieved_by', blank=True, null=True)
+
     requisition_status = models.ForeignKey(
         RequisitionStatus, on_delete=models.CASCADE)
     amount_requested = models.DecimalField(max_digits=5, decimal_places=1)

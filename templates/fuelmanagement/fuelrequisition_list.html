@@ -1,0 +1,82 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+{% block content %}
+
+<h2 class="text-center"> Fuel Requistions Listing </h2>
+<div class="tg-wrap  ">
+
+ <table class="table table-hover table-layout:fixed">
+<thead class="thead-light">
+<div>
+<form method="GET" action="" >
+
+  {{ requisition_filtered_list.form|crispy }}
+  <button type="submit" class="btn btn-primary"> <span class="glyphicon glyphicon-search"></span>Serarch</button>
+
+</form>
+</div>
+  <tr>
+   <th>Requistion Number</th>
+    <th>Vehicle Reg Number</th>
+    <th>Requestor</th>
+    {% comment %} <th>First Name</th> {% endcomment %}
+     <th>Position</th>
+     <th>Department</th>
+     <th>station</th>
+    <th>Vehicle Model</th>
+    <th>Requsition Date</th>
+    <th>Status</th>
+    <th>Approved by</th>
+    <th>Purpose</th>
+    <th>Current Milage</th>
+    <th>Amount Requested</th>
+    <th>Amount Approved</th>
+    <th>Approval Date</th>
+    <th>Recieved by</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for fuelrequisition in requisition_filtered_list.qs %}
+   {% comment %} <a href={% url 'viewrequistiondetail' fuelrequisition.id %}> {% endcomment %}
+
+  <tr>
+    <td><a href={% url 'viewrequistiondetail' fuelrequisition.id %} >{{fuelrequisition.id}} </a> </td>
+    <td>{{fuelrequisition.registration_number}}</td>
+    {% comment %} <td>{{fuelrequisition.requestor}}</td> {% endcomment %}
+    <td>{{fuelrequisition.requestor.first_name|add:" "|add:fuelrequisition.requestor.last_name}}</td>
+    <td>{{fuelrequisition.requestor.profile.officer_title}}</td>
+     <td>{{fuelrequisition.requestor.profile.department_name}}</td>
+      <td>{{fuelrequisition.requestor.profile.station_name}}</td>
+    <td>{{fuelrequisition.registration_number.vehicle_model}}</td>
+    <td>{{fuelrequisition.requstion_date}}</td>
+    <td>{{fuelrequisition.requisition_status}}</td>
+      <td>{%if fuelrequisition.approved_by is not None %}
+    {{fuelrequisition.approved_by.first_name|add:" "|add:fuelrequisition.approved_by.last_name}}
+    
+     {%else%} 
+      {{None}}
+      {% endif %}
+      </td>
+    <td>{{fuelrequisition.purpose}}</td>
+    <td>{{fuelrequisition.current_milage}}</td>
+    <td>{{fuelrequisition.amount_requested}}</td>
+    <td>{{fuelrequisition.amount_approved}}</td>
+    <td>{{fuelrequisition.approval_date}}</td>          
+    <td>{%if fuelrequisition.fuel_recieved_by is not None %}
+    {{fuelrequisition.fuel_recieved_by.first_name|add:" "|add:fuelrequisition.fuel_recieved_by.last_name}}</td>
+    
+     {%else%} 
+      {{None}}
+      {% endif %}</td>
+  </tr>
+
+  
+  {%endfor%}
+  </tbody>
+</table>
+
+</div>
+
+
+
+ {% endblock %}

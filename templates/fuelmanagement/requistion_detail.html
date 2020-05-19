@@ -1,1 +1,83 @@
-<h2> requistion details working  <h/2>
+{% extends 'base.html' %} {% block content %}
+
+<h2>Requisition details</h2>
+
+<table class="table .table-bordered table-inverse">
+  <tr>
+    <th class="bold">Requisition Number</th>
+
+    <td>{{requisition.id}}</td>
+  </tr>
+  <tr>
+    <th>Requestor</th>
+    <td>{{requisition.requestor.first_name|add:" "|add:requisition.requestor.last_name}}</td>
+  </tr>
+<tr>
+<th>Department Name</th>
+<td>{{requisition.requestor.profile.department_name}}</td>
+</tr>
+  <tr>
+    <th>Registration Number</th>
+    <td>{{requisition.registration_number}}</td>
+  </tr>
+  
+  <tr>
+    <th>Requisition Status</th>
+    <td>{{requisition.requisition_status}}</td>
+  </tr>
+    <th>Amount of Fuel Requested</th>
+    <td>{{requisition.amount_requested}}</td>
+  </tr>
+</tr>
+<th>Fuel Type</th>
+<td>{{requisition.fuel}}</td>
+</tr>
+  <tr>
+    <th>Purpose</th>
+    <td>{{requisition.purpose}}</td>
+  </tr>
+  <tr>
+    <th>Requisition Status</th>
+    <td>{{requisition.requisition_status}}</td>
+  </tr>
+  <tr>
+    <th>Current Millage</th>
+    <td>{{requisition.current_milage}}</td>
+  </tr>
+  <tr>
+    <th> Approved By</th>
+    <td>
+    {%if requisition.approved_by is not None %}
+    {{requisition.approved_by.first_name|add:" "|add:requisition.approved_by.last_name}}
+    
+     {%else%} 
+      {{None}}
+      {% endif %}
+    
+    </td>
+  </tr>
+  <tr>
+    <th>Amount Approved</th>
+    <td>{{requisition.amount_approved}}</td>
+  </tr>
+  <tr>
+    <th>Approval Date</th>
+    <td>{{requisition.approval_date}}</td>
+  </tr>
+  <tr>
+    <th>
+        Fuel Recieved By</th>
+    <td>
+    {%if requisition.fuel_recieved_by is not None %}
+    {{requisition.fuel_recieved_by.first_name|add:" "|add:requisition.fuel_recieved_by.last_name}}
+    
+     {%else%} 
+      {{None}}
+      {% endif %}
+        
+    </td>
+  
+
+</table>
+
+{% endblock %}
